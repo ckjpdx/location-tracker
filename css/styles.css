@@ -1,0 +1,16 @@
+/*#show-___ {
+  display: none;
+}*/
+
+ul {
+  list-style: none;
+}
+
+.registeredLocation {
+  cursor: pointer;
+  color: #0088cc;
+}
+
+.registeredLocation:hover {
+  text-decoration: underline;
+}
