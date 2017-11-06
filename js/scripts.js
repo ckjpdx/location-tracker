@@ -12,39 +12,36 @@ $(document).ready(function() {
   var visitId = 0;
   $("#visited-form").submit(function(event) {
     event.preventDefault();
-    var country = $("input#input-country").val();
-    var location = $("input#input-location").val();
-    var landmarks = $("input#input-landmarks").val();
-    var time = $("input#input-time").val();
-    var notes = $("input#input-notes").val();
-    var newVisit = new Visit(visitId, country, location, landmarks, time, notes);
-    visits.push(newVisit);
-    $("ul#visitedPlaces").append("<li><span class='registeredLocation' id='" + visitId + "'>" + newVisit.country + "</span></li>");
-    visitId++;
+    var isFormFilled = true;
     $("input").each(function(){
-      $(this).val("");
+      if ($(this).val().length === 0) {
+        isFormFilled = false;
+        console.log('isFormFilled false');
+      }
     });
-    $('.registeredLocation').last().click(function(){
-      var thisId = $(this).attr('id');
-      var thisObj = {};
-      visits.forEach(function(each){
-        if (thisId === each.visitId) {
-          thisObj = each;
-          console.log(each);
-          console.log(thisObj);
-          $(".place-country").text(thisObj.country);
-          $(".place-location" + thisId).text(thisObj.location);
-          $(".place-landmarks" + thisId).text(thisObj.landmarks);
-          $(".place-time" + thisId).text(thisObj.time);
-          $(".place-notes" + thisId).text(thisObj.notes);
-        } else {
-          thisObj = each;
-          console.log('else');
-          console.log(thisId);
-          console.log(each);
-          console.log(thisObj);
-        }
+    if (isFormFilled) {
+      var country = $("input#input-country").val();
+      var location = $("input#input-location").val();
+      var landmarks = $("input#input-landmarks").val();
+      var time = $("input#input-time").val();
+      var notes = $("input#input-notes").val();
+      var visit = new Visit(visitId, country, location, landmarks, time, notes);
+      visits.push(visit);
+      console.log(visits);
+      $("ul#visitedPlaces").append("<li><span class='registeredLocation' id='" + visitId + "'>" + visit.country + "</span></li>");
+      visitId++;
+      $("input").each(function(){
+        $(this).val("");
       });
-    });
+      $('.registeredLocation').last().click(function(){
+        $(".place-country").text(visit.country);
+        $(".place-location").text(visit.location);
+        $(".place-landmarks").text(visit.landmarks);
+        $(".place-time").text(visit.time);
+        $(".place-notes").text(visit.notes);
+      });
+    } else {
+      alert('Please fill in the form entirely');
+    }
   });
 });

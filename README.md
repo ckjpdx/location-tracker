@@ -17,6 +17,10 @@ This website will keep track of all places visited
 > User clicks on  "Spain" --> "Location: Spain, Date: Fall 2009, Landmarks: Goya Museum, Notes: really clean streets"
 ---
 
+### Planned
+Add feature to delete visits
+Add feature to edit visits
+
 ### Contact
 
 ### License
