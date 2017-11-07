@@ -10,6 +10,7 @@ function Visit(visitId, country, location, landmarks, time, notes) {
 $(document).ready(function() {
   var visits = [];
   var visitId = 0;
+  var clickedId = 0;
   $("#visited-form").submit(function(event) {
     event.preventDefault();
     var isFormFilled = true;
@@ -33,15 +34,35 @@ $(document).ready(function() {
       $("input").each(function(){
         $(this).val("");
       });
-      $('.registeredLocation').last().click(function(){
-        $(".place-country").text(visit.country);
-        $(".place-location").text(visit.location);
-        $(".place-landmarks").text(visit.landmarks);
-        $(".place-time").text(visit.time);
-        $(".place-notes").text(visit.notes);
-      });
     } else {
       alert('Please fill in the form entirely');
     }
+    $('span.registeredLocation').click(function(){
+      console.log('location click');
+      clickedId = parseInt($(this).attr("id"));
+      visits.forEach(function(visitInArray){
+        if (visitInArray.visitId === clickedId) {
+          currentVisitObject = visitInArray;
+          $("span.place-country").text(visitInArray.country);
+          $("span.place-location").text(visitInArray.location);
+          $("span.place-landmarks").text(visitInArray.landmarks);
+          $("span.place-time").text(visitInArray.time);
+          $("span.place-notes").text(visitInArray.notes);
+        }
+      });
+    });
+    $('button#delete-visit').click(function(){
+      console.log('delete clicked');console.log(clickedId);
+      $('span.registeredLocation').each(function(){
+        if (parseInt($(this).attr('id')) === clickedId) {
+          $(this).remove();
+        }
+      });
+      visits.forEach(function(visitInArray, index){
+        if (visitInArray.visitId === clickedId) {
+          visits.splice(index, 1);
+        }
+      });
+    });
   });
 });
