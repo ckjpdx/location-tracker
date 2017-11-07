@@ -12,25 +12,24 @@
     <div class="container">
       <h1>Travel Tracker</h1>
       <div class="row">
-        <div class="col-4">
+        <div class="col" id="visited-placed-div">
+          <ul id="visitedPlaces">
+            <!-- Library goes here -->
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
           <form id="visited-form">
             <input id="input-country" type="text" placeholder="Country">
             <input id="input-location" type="text" placeholder="Location">
             <input id="input-landmarks" type="text" placeholder="Landmarks">
             <input id="input-time" type="text" placeholder="Year / Season">
             <input id="input-notes" type="text" placeholder="Notes">
-            <button type="submit" class="btn">TRAVELTRACKIT</button>
+            <button type="submit" class="btn">Create</button>
+            <button id="update-visit" class="btn" type="button">Update</button>
+            <button id="delete-visit" class="btn btn-danger float-right" type="button">Delete</button>
           </form>
-          <ul id="visitedPlaces">
-          </ul>
-        </div>
-        <div class="col-8 place-info">
-          <h2><span class="place-country">INFO AREA</span></h2>
-          <h3><span class="place-location">INFO AREA</span></h3>
-          <p><span class="place-landmarks">INFO AREA</span></p>
-          <p><span class="place-time">INFO AREA</span></p>
-          <p><span class="place-notes">INFO AREA</span></p>
-          <button id="delete-visit" type="button">Delete</button>
         </div>
       </div>
     </div> <!--CONTAINER DIV-->

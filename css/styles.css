@@ -14,3 +14,14 @@ li {
 .registeredLocation:hover {
   text-decoration: underline;
 }
+
+input {
+  width: 100%;
+}
+
+#visited-placed-div {
+  height: 100px;
+  background-color: #EEE;
+  overflow: auto;
+  color: black;
+}

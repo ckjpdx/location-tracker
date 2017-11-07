@@ -1,3 +1,5 @@
+// plan to replace indexing system with object[index] system
+
 function Visit(visitId, country, location, landmarks, time, notes) {
   this.visitId = visitId;
   this.country = country;
@@ -38,16 +40,18 @@ $(document).ready(function() {
       alert('Please fill in the form entirely');
     }
     $('span.registeredLocation').click(function(){
+      $(".registeredLocation").css('background-color','inherit'); // reset all library colors
+      $(this).css("background-color","#CCF"); // highlight selected listing
       console.log('location click');
       clickedId = parseInt($(this).attr("id"));
       visits.forEach(function(visitInArray){
         if (visitInArray.visitId === clickedId) {
           currentVisitObject = visitInArray;
-          $("span.place-country").text(visitInArray.country);
-          $("span.place-location").text(visitInArray.location);
-          $("span.place-landmarks").text(visitInArray.landmarks);
-          $("span.place-time").text(visitInArray.time);
-          $("span.place-notes").text(visitInArray.notes);
+          $("input#input-country").val(visitInArray.country);
+          $("input#input-location").val(visitInArray.location);
+          $("input#input-landmarks").val(visitInArray.landmarks);
+          $("input#input-time").val(visitInArray.time);
+          $("input#input-notes").val(visitInArray.notes);
         }
       });
     });
@@ -62,6 +66,23 @@ $(document).ready(function() {
         if (visitInArray.visitId === clickedId) {
           visits.splice(index, 1);
         }
+      });
+      $("input").each(function(){
+        $(this).val("");
+      });
+    }); // delete button
+    $('button#update-visit').click(function(){
+      visits.forEach(function(visitInArray){
+        if (visitInArray.visitId === clickedId) {
+          visitInArray.country = $("input#input-country").val();
+          visitInArray.location = $("input#input-location").val();
+          visitInArray.landmarks = $("input#input-landmarks").val();
+          visitInArray.time = $("input#input-time").val();
+          visitInArray.notes = $("input#input-notes").val();
+        }
+      });
+      $("input").each(function(){
+        $(this).val("");
       });
     });
   });
